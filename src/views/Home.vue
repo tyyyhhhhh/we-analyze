@@ -2,6 +2,7 @@
   <div class="home">
     <h1>I am the parent</h1>
     <Child :events="events"/>
+    <UniqueVisitors :users="users"/>
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import axios from "axios";
 import Child from "@/components/Child";
+import UniqueVisitors from "@/components/UniqueVisitors.vue";
 
 export default {
   name: "home",
   components: {
     HelloWorld,
-    Child
+    Child,
+    UniqueVisitors
   },
   // Data object scoped to a component
   data() {
