@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+
 import Gender from './components/Gender.vue'
+
+import OverallStats from './components/OverallStats'
+
 
 Vue.use(Router)
 
@@ -13,9 +17,15 @@ export default new Router({
       component: Home
     },
     {
+
       path: '/gender',
       name: 'Gender',
       component: Gender
+    },
+
+      path: '/overallstats',
+      name: 'overall stats',
+      component: OverallStats
     },
 
     {
