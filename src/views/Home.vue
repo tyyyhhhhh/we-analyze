@@ -21,6 +21,7 @@ import axios from 'axios'
 import Child from '@/components/Child'
 import Gender from '@/components/Gender'
 import ApexCharts from 'apexcharts'
+import OverallStats from '@/components/OverallStats'
 
 // ES6
 // import name from 'path/to/file'
@@ -30,38 +31,26 @@ import ApexCharts from 'apexcharts'
 // const name = require('path/to/file')
 
 
-import HelloWorld from "@/components/HelloWorld.vue";
-import axios from "axios";
-import Child from "@/components/Child";
-
-
 export default {
   name: "home",
   components: {
     HelloWorld,
     Child,
-
     Gender,
-
     OverallStats
-
   },
   // Data object scoped to a component
   data() {
     return {
       title: null,
       events: [],
-
       users: [],
-       totalVisits: 0
+      totalVisits: 0
     }
-     
-    };
-
   },
+
   mounted() {
-    this.loadEventData();
-    this.loadUserData();
+    this.loadData();
     this.loadTotalVisitsData();
   },
   // Methods are called once
