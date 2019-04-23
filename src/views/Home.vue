@@ -4,8 +4,8 @@
     <Child :events="events"></Child>
     <Gender :users="users" :events="events"></Gender>
 
-    <h1>I am the parent : Home Page</h1>
-    <OverallStats :users="users" :totalVisits="totalVisits"/>
+    <h1>Here are the Overall Stats Components:</h1>
+    <OverallStats :users="users" :totalVisits="totalVisits" :validVisits="validVisits"/>
   </div>
 </template>
 
@@ -17,16 +17,13 @@ import axios from "axios";
 import Child from "@/components/Child";
 import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
+import OverallStats from "@/components/OverallStats";
 
 // ES6
 // import name from 'path/to/file'
 
 // ES5
 // const name = require('path/to/file')
-
-import HelloWorld from "@/components/HelloWorld.vue";
-import axios from "axios";
-import Child from "@/components/Child";
 
 export default {
   name: "home",
@@ -43,16 +40,14 @@ export default {
     return {
       title: null,
       events: [],
-
       users: [],
       totalVisits: 0,
-      bounceRate: 0
+      validVisits: 0
     };
   },
   mounted() {
-    this.loadEventData();
-    this.loadUserData();
     this.loadTotalVisitsData();
+    this.loadData();
   },
   // Methods are called once
   methods: {
@@ -67,8 +62,15 @@ export default {
           .get("https://haoshihui.wogengapp.cn/api/v1/users")
           .then(response => {
             let data = response.data.users;
-            // console.log(data)
             this.users = data;
+            let validVisits = 0;
+            data.forEach(user => {
+              if (user.nickName) {
+                validVisits = validVisits + 1;
+              }
+            });
+            this.validVisits = validVisits;
+            console.log("Valid visits", validVisits);
           });
     },
 
