@@ -11,22 +11,25 @@
       :validVisits="validVisits"
       :averageTimeSpent="averageTimeSpent"
     />
+    
+     <DailyStats v-if="events.length>0" :users="users" :events="events"/>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import HelloWorld from "@/components/HelloWorld.vue";
-import axios from "axios";
-import Child from "@/components/Child";
-import Gender from "@/components/Gender";
-import ApexCharts from "apexcharts";
-import OverallStats from "@/components/OverallStats";
+import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios'
+import Child from '@/components/Child'
+import Gender from '@/components/Gender'
+import ApexCharts from 'apexcharts'
+import OverallStats from '@/components/OverallStats'
+import DailyStats from '@/components/DailyStats'
 
 // ES6
 // import name from 'path/to/file'
-
 // ES5
 // const name = require('path/to/file')
 
@@ -35,10 +38,10 @@ export default {
   components: {
     HelloWorld,
     Child,
-
     Gender,
 
-    OverallStats
+    OverallStats,
+    DailyStats
   },
   // Data object scoped to a component
   data() {
@@ -50,7 +53,9 @@ export default {
       validVisits: 0,
       averageTimeSpent: 0
     };
+
   },
+
   mounted() {
     this.loadTotalVisitsData();
     this.loadData();
