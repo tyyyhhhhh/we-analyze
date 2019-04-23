@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import UniqueVisitors from './components/UniqueVisitors'
+import OverallStats from './components/OverallStats'
 
 Vue.use(Router)
 
@@ -13,9 +13,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/uniquevisitors',
-      name: 'unique visitors',
-      component: UniqueVisitors
+      path: '/overallstats',
+      name: 'overall stats',
+      component: OverallStats
     },
     {
       path: '/about',
