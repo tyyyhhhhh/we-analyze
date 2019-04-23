@@ -25,7 +25,8 @@ export default {
       title: null,
       events: [],
       users: [],
-      totalVisits: 0
+      totalVisits: 0,
+      bounceRate: 0
     };
   },
   mounted() {
@@ -35,30 +36,13 @@ export default {
   },
   // Methods are called once
   methods: {
-    loadEventData() {
-      axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
-        .then(response => {
-          let data = response.data.events;
-          this.events = data;
-        });
-    },
-
-    loadUserData() {
-      axios.get("http://haoshihui.wogengapp.cn/api/v1/users").then(response => {
-        let data = response.data.users;
-        this.users = data;
-      });
-    },
-
     loadTotalVisitsData() {
       axios
         .get("http://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
-          console.log(response);
           let data = response.data;
           let totalVisits = 0;
-          console.log(data);
+
           data.events.forEach(event => {
             if (event.description === "newCustomer onLoad") {
               totalVisits = totalVisits + 1;
