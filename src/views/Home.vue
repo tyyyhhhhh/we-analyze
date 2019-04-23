@@ -7,12 +7,12 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios'
-import Child from '@/components/Child'
- 
+import HelloWorld from "@/components/HelloWorld.vue";
+import axios from "axios";
+import Child from "@/components/Child";
+
 export default {
-  name: 'home',
+  name: "home",
   components: {
     HelloWorld,
     Child
@@ -21,25 +21,36 @@ export default {
   data() {
     return {
       title: null,
-      events: []
-    }
+      events: [],
+      users: []
+    };
   },
   mounted() {
-    this.loadData()
+    this.loadEventData();
+    this.loadUserData();
   },
   // Methods are called once
   methods: {
-    loadData() {
-      axios.get('http://haoshihui.wogengapp.cn/api/v1/events')
-        .then((response) => {
-          let data = response.data.events
-          this.events = data
-        })
-    }
-  },
-}
-</script>
-<style>
+    loadEventData() {
+      axios
+        .get("http://haoshihui.wogengapp.cn/api/v1/events")
+        .then(response => {
+          let data = response.data.events;
+          this.events = data;
+        });
+    },
 
+    loadUserData() {
+      axios.get("http://haoshihui.wogengapp.cn/api/v1/users").then(response => {
+        let data = response.data.users;
+        this.users = data;
+      });
+    }
+  }
+};
+</script>
+
+
+<style>
 </style>
 
