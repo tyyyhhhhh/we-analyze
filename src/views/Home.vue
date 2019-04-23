@@ -5,7 +5,12 @@
     <Gender :users="users" :events="events"></Gender>
 
     <h1>Here are the Overall Stats Components:</h1>
-    <OverallStats :users="users" :totalVisits="totalVisits" :validVisits="validVisits"/>
+    <OverallStats
+      :users="users"
+      :totalVisits="totalVisits"
+      :validVisits="validVisits"
+      :averageTimeSpent="averageTimeSpent"
+    />
   </div>
 </template>
 
@@ -42,7 +47,8 @@ export default {
       events: [],
       users: [],
       totalVisits: 0,
-      validVisits: 0
+      validVisits: 0,
+      averageTimeSpent: 0
     };
   },
   mounted() {
@@ -80,14 +86,46 @@ export default {
         .then(response => {
           let data = response.data;
           let totalVisits = 0;
-
           data.events.forEach(event => {
             if (event.description === "newCustomer onLoad") {
               totalVisits = totalVisits + 1;
             }
           });
-          console.log("Total visits", totalVisits);
           this.totalVisits = totalVisits;
+
+          let totalTimeSpent = [];
+          let initSession = "";
+          let endSession = "";
+          let timeSpent = 0;
+          data.events.forEach(event => {
+            if (event.description === "newCustomer onLoad") {
+              initSession = event;
+              console.log("initSession", initSession);
+            }
+            if (
+              event.description === "customerLeft" &&
+              event.user_open_id === initSession.user_open_id
+            ) {
+              endSession = event;
+              console.log("endSession", endSession);
+
+              timeSpent =
+                parseInt(endSession.timestamp) -
+                parseInt(initSession.timestamp);
+              console.log(`${timeSpent} is the timeSpent`);
+              totalTimeSpent.push(timeSpent);
+            }
+          });
+          console.log("totalTimespent", totalTimeSpent);
+          let total = 0;
+          for (let i = 0; i < totalTimeSpent.length; i++) {
+            total += totalTimeSpent[i];
+          }
+          console.log("total", total);
+          let averageTimeSpentFloat = total / totalTimeSpent.length;
+          let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
+          console.log("averageTimesSpent", averageTimeSpent);
+          this.averageTimeSpent = averageTimeSpent;
         });
     }
   }

@@ -15,6 +15,11 @@
       <fa-icon icon="chart-bar"/>
     </div>
     <el-button type="danger" plain>{{bounceRate}}%</el-button>
+    <p>Average Time Spent:</p>
+    <div>
+      <fa-icon icon="history"/>
+    </div>
+    <el-button type="primary" plain>{{averageTimeSpent}}s</el-button>
   </div>
 </template>
 
@@ -32,13 +37,14 @@ export default {
     },
     validVisits: {
       type: Number
-    }
+    },
+    averageTimeSpent: {}
   },
   computed: {
     bounceRate() {
-      let bounceRate0 = (1 - this.validVisits / this.totalVisits) * 100;
+      let bounceRateFloat = (1 - this.validVisits / this.totalVisits) * 100;
 
-      let bounceRate = Number(bounceRate0).toFixed(2);
+      let bounceRate = Number(bounceRateFloat).toFixed(2);
 
       return bounceRate;
     }
