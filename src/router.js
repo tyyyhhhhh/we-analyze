@@ -22,7 +22,7 @@ export default new Router({
       name: 'Gender',
       component: Gender
     },
-
+    {
       path: '/overallstats',
       name: 'overall stats',
       component: OverallStats
