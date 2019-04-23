@@ -7,6 +7,7 @@
 
     <h1>I am the parent : Home Page</h1>
     <OverallStats :users="users" :totalVisits="totalVisits"/>
+     <DailyStats v-if="events.length>0" :users="users" :events="events"/>
 
   </div>
 
@@ -22,6 +23,8 @@ import Child from '@/components/Child'
 import Gender from '@/components/Gender'
 import ApexCharts from 'apexcharts'
 import OverallStats from '@/components/OverallStats'
+import DailyStats from '@/components/DailyStats'
+
 
 // ES6
 // import name from 'path/to/file'
@@ -37,7 +40,8 @@ export default {
     HelloWorld,
     Child,
     Gender,
-    OverallStats
+    OverallStats,
+    DailyStats
   },
   // Data object scoped to a component
   data() {
