@@ -1,17 +1,20 @@
 <template>
   <div class="home">
-
     <h1>I am the parent</h1>
     <Child :events="events"></Child>
     <Gender :users="users" :events="events"></Gender>
 
-    <h1>I am the parent : Home Page</h1>
-    <OverallStats :users="users" :totalVisits="totalVisits"/>
+    <h1>Here are the Overall Stats Components:</h1>
+    <OverallStats
+      :users="users"
+      :totalVisits="totalVisits"
+      :validVisits="validVisits"
+      :averageTimeSpent="averageTimeSpent"
+    />
+    
      <DailyStats v-if="events.length>0" :users="users" :events="events"/>
 
   </div>
-
-
 </template>
 
 <script>
@@ -25,14 +28,10 @@ import ApexCharts from 'apexcharts'
 import OverallStats from '@/components/OverallStats'
 import DailyStats from '@/components/DailyStats'
 
-
 // ES6
 // import name from 'path/to/file'
-
-
 // ES5
 // const name = require('path/to/file')
-
 
 export default {
   name: "home",
@@ -40,6 +39,7 @@ export default {
     HelloWorld,
     Child,
     Gender,
+
     OverallStats,
     DailyStats
   },
@@ -49,48 +49,88 @@ export default {
       title: null,
       events: [],
       users: [],
-      totalVisits: 0
-    }
+      totalVisits: 0,
+      validVisits: 0,
+      averageTimeSpent: 0
+    };
+
   },
 
   mounted() {
-    this.loadData();
     this.loadTotalVisitsData();
+    this.loadData();
   },
   // Methods are called once
   methods: {
-
     loadData() {
-      axios.get('http://haoshihui.wogengapp.cn/api/v1/events')
-        .then((response) => {
-          let data = response.data.events
-          this.events = data
+      axios
+        .get("http://haoshihui.wogengapp.cn/api/v1/events")
+        .then(response => {
+          let data = response.data.events;
+          this.events = data;
         }),
-
-      axios.get('https://haoshihui.wogengapp.cn/api/v1/users')
-        .then((response) => {
-          let data = response.data.users
-          // console.log(data)
-          this.users = data
-        })
-
+        axios
+          .get("https://haoshihui.wogengapp.cn/api/v1/users")
+          .then(response => {
+            let data = response.data.users;
+            this.users = data;
+            let validVisits = 0;
+            data.forEach(user => {
+              if (user.nickName) {
+                validVisits = validVisits + 1;
+              }
+            });
+            this.validVisits = validVisits;
+            console.log("Valid visits", validVisits);
+          });
     },
 
     loadTotalVisitsData() {
       axios
         .get("http://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
-          console.log(response);
           let data = response.data;
           let totalVisits = 0;
-          console.log(data);
           data.events.forEach(event => {
             if (event.description === "newCustomer onLoad") {
               totalVisits = totalVisits + 1;
             }
           });
-          console.log("Total visits", totalVisits);
           this.totalVisits = totalVisits;
+
+          let totalTimeSpent = [];
+          let initSession = "";
+          let endSession = "";
+          let timeSpent = 0;
+          data.events.forEach(event => {
+            if (event.description === "newCustomer onLoad") {
+              initSession = event;
+              console.log("initSession", initSession);
+            }
+            if (
+              event.description === "customerLeft" &&
+              event.user_open_id === initSession.user_open_id
+            ) {
+              endSession = event;
+              console.log("endSession", endSession);
+
+              timeSpent =
+                parseInt(endSession.timestamp) -
+                parseInt(initSession.timestamp);
+              console.log(`${timeSpent} is the timeSpent`);
+              totalTimeSpent.push(timeSpent);
+            }
+          });
+          console.log("totalTimespent", totalTimeSpent);
+          let total = 0;
+          for (let i = 0; i < totalTimeSpent.length; i++) {
+            total += totalTimeSpent[i];
+          }
+          console.log("total", total);
+          let averageTimeSpentFloat = total / totalTimeSpent.length;
+          let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
+          console.log("averageTimesSpent", averageTimeSpent);
+          this.averageTimeSpent = averageTimeSpent;
         });
     }
   }
@@ -100,6 +140,5 @@ export default {
 
 
 <style>
-
 </style>
 
