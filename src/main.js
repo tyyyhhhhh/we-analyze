@@ -13,8 +13,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faChartBar, faCoffee, faHistory, } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { faChartBar } from '@fortawesome/free-regular-svg-icons'
+import BootstrapVue from 'bootstrap-vue'
 
+Vue.use(BootstrapVue)
+// import { faChartBar } from '@fortawesome/free-regular-svg-icons'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 library.add(faUserSecret, faChartBar, faCoffee, faHistory)
 
 
