@@ -9,19 +9,20 @@
 
     <h1>Here are the Overall Stats Components:</h1>
     <OverallStats
+      v-if="events.length>0"
       :users="users"
       :totalVisits="totalVisits"
       :validVisits="validVisits"
-      :averageTimeSpent="averageTimeSpent"
+      :totalTimeSpent="totalTimeSpent"
     />
-    
 
-
+    <DailyStats v-if="events.length>0" :users="users" :events="events"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 
 import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
@@ -31,6 +32,7 @@ import ApexCharts from 'apexcharts'
 import OverallStats from '@/components/OverallStats'
 // import DailyStats from '@/components/DailyStats'
 import DailyStatsUV from '@/components/DailyStatsUV'
+
 
 // ES6
 // import name from 'path/to/file'
@@ -57,14 +59,16 @@ export default {
       users: [],
       totalVisits: 0,
       validVisits: 0,
-      averageTimeSpent: 0
+      averageTimeSpent: 0,
+      totalTimeSpent: 0
     };
-
   },
 
   mounted() {
-    this.loadTotalVisitsData();
-    this.loadData();
+    setInterval(() => {
+      this.loadTotalVisitsData();
+      this.loadData();
+    }, 3000);
   },
   // Methods are called once
   methods: {
@@ -98,7 +102,7 @@ export default {
           let data = response.data;
           let totalVisits = 0;
           data.events.forEach(event => {
-            if (event.description === "newCustomer onLoad") {
+            if (event.description === "customerOpenApp") {
               totalVisits = totalVisits + 1;
             }
           });
@@ -109,7 +113,7 @@ export default {
           let endSession = "";
           let timeSpent = 0;
           data.events.forEach(event => {
-            if (event.description === "newCustomer onLoad") {
+            if (event.description === "customerOpenApp") {
               initSession = event;
               console.log("initSession", initSession);
             }
@@ -133,6 +137,11 @@ export default {
             total += totalTimeSpent[i];
           }
           console.log("total", total);
+          this.totalTimeSpent = {
+            total: total,
+            totalTimeSpentArray: totalTimeSpent
+          };
+
           let averageTimeSpentFloat = total / totalTimeSpent.length;
           let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
           console.log("averageTimesSpent", averageTimeSpent);

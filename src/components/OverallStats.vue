@@ -1,25 +1,33 @@
 <template>
-  <div>
-    <p>Unique Visitors:</p>
-    <div>
-      <fa-icon icon="chart-bar"/>
+  <div class="overallStats-Container">
+    <div class="outterBox">
+      <p>Total Visits:</p>
+      <div class="innerBox">
+        <fa-icon icon="chart-bar" class="chart-bar-warning"/>
+        <el-button type="warning" size="mini" round plain>{{totalVisits}}</el-button>
+      </div>
     </div>
-    <el-button type="success" plain>{{users.length}}</el-button>
-    <p>Total Visits:</p>
-    <div>
-      <fa-icon icon="chart-bar"/>
+    <div class="outterBox">
+      <p>Unique Visitors:</p>
+      <div class="innerBox">
+        <fa-icon icon="chart-bar" class="chart-bar-success"/>
+        <el-button type="success" size="mini" round plain>{{users.length}}</el-button>
+      </div>
     </div>
-    <el-button type="warning" plain>{{totalVisits}}</el-button>
-    <p>Bounce Rate:</p>
-    <div>
-      <fa-icon icon="chart-bar"/>
+    <div class="outterBox">
+      <p>Bounce Rate:</p>
+      <div class="innerBox">
+        <fa-icon icon="chart-bar" class="chart-bar-danger"/>
+        <el-button type="danger" size="mini" round plain>{{bounceRate}}%</el-button>
+      </div>
     </div>
-    <el-button type="danger" plain>{{bounceRate}}%</el-button>
-    <p>Average Time Spent:</p>
-    <div>
-      <fa-icon icon="history"/>
+    <div class="outterBox">
+      <p>Avg Time Spent:</p>
+      <div class="innerBox">
+        <fa-icon icon="history" class="history-icon-primary"/>
+        <el-button type="primary" size="mini" round plain>{{averageTimeSpent}}s</el-button>
+      </div>
     </div>
-    <el-button type="primary" plain>{{averageTimeSpent}}s</el-button>
   </div>
 </template>
 
@@ -38,14 +46,19 @@ export default {
     validVisits: {
       type: Number
     },
-    averageTimeSpent: {}
+    totalTimeSpent: {}
   },
   computed: {
+    averageTimeSpent() {
+      let { total, totalTimeSpentArray } = this.totalTimeSpent;
+      let averageTimeSpentFloat = total / totalTimeSpentArray.length;
+      let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
+      console.log("Time spent", averageTimeSpent);
+      return averageTimeSpent;
+    },
     bounceRate() {
       let bounceRateFloat = (1 - this.validVisits / this.totalVisits) * 100;
-
-      let bounceRate = Number(bounceRateFloat).toFixed(2);
-
+      let bounceRate = Number(bounceRateFloat).toFixed(0);
       return bounceRate;
     }
   }
@@ -54,4 +67,36 @@ export default {
 
 
 <style>
+.overallStats-Container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.innerBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.outterBox {
+  width: 120px;
+}
+.chart-bar-success {
+  color: #67c23a;
+  font-size: 25px;
+}
+
+.chart-bar-warning {
+  color: #e6a23c;
+  font-size: 25px;
+}
+
+.chart-bar-danger {
+  color: #f56c6c;
+  font-size: 25px;
+}
+
+.history-icon-primary {
+  color: #409eff;
+  font-size: 25px;
+}
 </style>
