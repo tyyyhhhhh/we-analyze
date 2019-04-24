@@ -3,6 +3,9 @@
     <h1>I am the parent</h1>
     <Child :events="events"></Child>
     <Gender :users="users" :events="events"></Gender>
+     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
+      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+
 
     <h1>Here are the Overall Stats Components:</h1>
     <OverallStats
@@ -20,13 +23,16 @@
 <script>
 // @ is an alias to /src
 
-import HelloWorld from "@/components/HelloWorld.vue";
-import axios from "axios";
-import Child from "@/components/Child";
-import Gender from "@/components/Gender";
-import ApexCharts from "apexcharts";
-import OverallStats from "@/components/OverallStats";
-import DailyStats from "@/components/DailyStats";
+
+import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios'
+import Child from '@/components/Child'
+import Gender from '@/components/Gender'
+import ApexCharts from 'apexcharts'
+import OverallStats from '@/components/OverallStats'
+// import DailyStats from '@/components/DailyStats'
+import DailyStatsUV from '@/components/DailyStatsUV'
+
 
 // ES6
 // import name from 'path/to/file'
@@ -41,7 +47,9 @@ export default {
     Gender,
 
     OverallStats,
-    DailyStats
+    // DailyStats,
+    DailyStatsUV
+
   },
   // Data object scoped to a component
   data() {

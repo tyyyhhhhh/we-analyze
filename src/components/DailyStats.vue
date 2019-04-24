@@ -37,6 +37,7 @@ export default {
           name: "Desktops",
           data: [0, 0, 0, 0, 0, 0, 0]
         }
+
       ],
 
       chartOptions: {
@@ -69,6 +70,7 @@ export default {
         }
       }
     };
+
   },
 
   mounted() {
@@ -110,8 +112,55 @@ export default {
         return element;
       });
 
-      this.series[0].data = monthlyData;
-      // console.log("MOnthly Data", monthlyData)
+
+
+    this.events.forEach((event) => {
+
+      //this is the old daily stats
+      let timestamp = event.timestamp
+      let date = new Date(timestamp * 1000)
+
+      let userDate = date.getDate()
+      if (!dailystats[userDate]){
+        dailystats[userDate] = 1
+      } else if (dailystats[userDate] > 0 ){
+        dailystats[userDate] = dailystats[userDate] + 1
+      }
+      let userMonth = date.getMonth()+1;
+      hashes_bymonth_dailystats[userMonth] = dailystats
+    })
+
+    const thisMonthsData = hashes_bymonth_dailystats[mm]
+
+
+    const array_data = [thisMonthsData[dd-6],thisMonthsData[dd-5],thisMonthsData[dd-4],thisMonthsData[dd-3],thisMonthsData[dd-2],thisMonthsData[dd-1],thisMonthsData[dd]]
+
+
+    let monthlyData = array_data.map((element) => {
+      if(!element) { return 0 }
+      return element
+    })
+     console.log("hashes test", hashes_bymonth_dailystats)
+
+    this.series[0].data = monthlyData
+    console.log("MOnthly Data", monthlyData)
+
+
+    const weekly = [`${mm}/${dd -6}`, `${mm}/${dd -5}`, `${mm}/${dd -4}`, `${mm}/${dd -3}`, `${mm}/${dd - 2}`, `${mm}/${dd -1}`, `${mm}/${dd}`]
+
+    // this.chartOptions.xaxis.categories = weekly
+    console.log('xaxis test weeky ', weekly)
+
+
+    // const todaysData = thisMonthsData[dd]
+
+
+    // const prev1Data = thisMonthsData[dd - 1]
+    // console.log('test6',thisMonthsData[dd - 6])
+
+
+    // const prev2Data = thisMonthsData[dd - 2]
+
 
       const weekly = [
         `${mm}/${dd - 6}`,
