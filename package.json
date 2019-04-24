@@ -7,8 +7,13 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.7.2",
+    "jquery": "^3.4.0",
+    "jvectormap": "^2.0.4",
+    "lodash": "^4.17.11",
     "vue": "^2.6.10",
+    "vue-d2b": "^1.0.15",
     "vue-router": "^3.0.3"
   },
   "devDependencies": {
