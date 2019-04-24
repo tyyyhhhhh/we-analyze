@@ -1,10 +1,11 @@
 
 <template>
+  <div class="bg-forchart">
    <div id="chart">
        <h1>DailyStats:{{events.length}}</h1>
-
       <apexchart type=line height=350 :options="chartOptions" :series="series" />
     </div>
+  </div>
 </template>
 
 <script>
@@ -82,7 +83,7 @@ export default {
       this.dailyStatistics()
     },
 
-  methods: {
+  computed: {
 
     dailyStatistics() {
       let days = {}
@@ -132,16 +133,6 @@ export default {
     console.log("weekly Data", weeklyData)
 
     },
-
-
-
-
-
-    changeData() {
-      setInterval(() => {
-        this.series = [1,2,3,4]
-      },100)
-    }
   },
 
     props: {
@@ -149,15 +140,6 @@ export default {
             type: String,
             default: () => {
                 return 'DailyStats'
-            }
-        },
-        data: {
-            type: Object,
-            default: () => {
-                return {
-                    title: 'Nathan',
-                    role: 'Engineer'
-                }
             }
         },
         events: {
@@ -179,5 +161,13 @@ export default {
 
 
 <style>
+
+.bg-forchart {
+  background-color: white;
+  width: 800px;
+  padding: 10px;
+  margin: 30px 0;
+  border: 1px solid #EAEAEA;
+}
 
 </style>

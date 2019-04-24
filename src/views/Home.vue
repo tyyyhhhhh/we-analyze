@@ -1,18 +1,6 @@
 <template>
   <div class="home">
-    <h1>I am the parent</h1>
-
-    <Child :events="events"/>
-    <Map v-bind:mdata="map" />
-    <Funnel v-bind:events="events" />
-
-    <Child :events="events"></Child>
-    <Gender :users="users" :events="events"></Gender>
-     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
-      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
-
-
-    <h1>Here are the Overall Stats Components:</h1>
+    <h1>Overall Stats:</h1>
     <OverallStats
       v-if="events.length>0"
       :users="users"
@@ -21,7 +9,21 @@
       :totalTimeSpent="totalTimeSpent"
     />
 
-    <DailyStats v-if="events.length>0" :users="users" :events="events"/>
+  <div class="dailystats">
+    <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+    <Gender :users="users" :events="events"></Gender>
+  </div>
+    <Map v-bind:mdata="map" />
+    <Funnel v-bind:events="events" />
+
+
+
+     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
+
+
+
+
+
 
   </div>
 </template>
@@ -36,12 +38,11 @@ import Child from '@/components/Child'
 
 import Map from '@/components/Map'
 import Funnel from '@/components/Funnel'
- 
+
 
 import Gender from '@/components/Gender'
 import ApexCharts from 'apexcharts'
 import OverallStats from '@/components/OverallStats'
-// import DailyStats from '@/components/DailyStats'
 import DailyStatsUV from '@/components/DailyStatsUV'
 
 
@@ -143,7 +144,7 @@ export default {
           data.events.forEach(event => {
             if (event.description === "customerOpenApp") {
               initSession = event;
-              console.log("initSession", initSession);
+              //console.log("initSession", initSession);
             }
             if (
               event.description === "customerLeft" &&
@@ -183,5 +184,10 @@ export default {
 
 
 <style>
+
+.dailystats {
+  display: flex;
+}
+
 </style>
 
