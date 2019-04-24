@@ -3,7 +3,13 @@
 
 
     <div id="nav">
-      <img class="avatar" src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg" alt="">
+      <div class="company">
+        <img class="logo" src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg" alt="">
+        <div class="compname">WeAnalyze</div>
+      </div>
+      <div>
+        <img class="avatar" src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg" alt="">
+      </div>
      <!--  <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
     </div>
@@ -24,6 +30,8 @@
 }
 #nav {
   background-color:white;
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
   height: 50px;
   overflow: hidden;
@@ -46,11 +54,29 @@ body {
   border-radius: 50%;
   width: 50px;
   border: 1px solid grey;
-  float: right;
 }
 
 .container {
-  margin: 50px;
+  margin: 50px 80px;
+}
+
+.company {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  font-weight: bold;
+  position: relative;
+  margin: 0 0 0 15px
+}
+
+.compname {
+  position: absolute;
+  top: 10px;
+  left: 55px;
+}
+
+.logo {
+  width: 50px;
 }
 
 </style>

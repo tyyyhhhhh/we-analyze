@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Overall Stats:</h1>
     <OverallStats
       v-if="events.length>0"
       :users="users"
@@ -14,8 +13,8 @@
     <Gender :users="users" :events="events"></Gender>
   </div>
     <Map v-bind:mdata="map" />
-    <Funnel v-bind:events="events" />
-
+<!--     <Funnel v-bind:events="events" />
+ -->
 
 
      <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
@@ -187,6 +186,8 @@ export default {
 
 .dailystats {
   display: flex;
+  justify-content: space-between;
+  height: 550px;
 }
 
 </style>

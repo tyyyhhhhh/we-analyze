@@ -1,8 +1,8 @@
 
 <template>
   <div class="bg-forchart">
+      <h4>Daily Statistics by the Week</h4>
    <div id="chart">
-       <h1>DailyStats:{{events.length}}</h1>
       <apexchart type=line height=350 :options="chartOptions" :series="series" />
     </div>
   </div>
@@ -168,6 +168,7 @@ export default {
   padding: 10px;
   margin: 30px 0;
   border: 1px solid #EAEAEA;
+
 }
 
 </style>
