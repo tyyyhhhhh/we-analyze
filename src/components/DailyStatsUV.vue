@@ -1,5 +1,6 @@
+
 <template>
-    <div id="chart">
+   <div id="chart">
        <h1>DailyStats:{{events.length}}</h1>
 
       <apexchart type=line height=350 :options="chartOptions" :series="series" />
@@ -30,9 +31,12 @@ const hashes_bymonth_dailystats = {
 }
 const dailystats = {}
 
+const days_permonth = []
+let counter_hash = {}
+
 
 export default {
-  data() {
+   data() {
     return {
         series: [{
             name: "Desktops",
@@ -59,7 +63,7 @@ export default {
                 curve: 'straight'
             },
             title: {
-                text: 'Daily Statistics',
+                text: 'Unique Visitors Per Day',
                 align: 'left'
             },
             grid: {
@@ -78,75 +82,60 @@ export default {
       this.dailyStatistics()
     },
 
-
   methods: {
 
     dailyStatistics() {
+      let days = {}
+      this.events.forEach((event) => {
+        let timestamp = event.timestamp
+        let date = new Date(timestamp * 1000)
+        let userDate = date.getDate()
+        // console.log('counter', counter)
+        // console.log('user id',event.user_open_id)
+        let uniqueID = event.user_open_id
 
-    this.events.forEach((event) => {
+        if(uniqueID) {
+          days_permonth.push(userDate)
+          if(days[userDate]) {
+            if(!days[userDate].includes(uniqueID)) {
+              days[userDate].push(uniqueID)
 
-      //this is the old daily stats
-      let timestamp = event.timestamp
-      let date = new Date(timestamp * 1000)
+            }
+          } else {
+            days[userDate] = [uniqueID]
+          }
+        }
+      })
 
-      let userDate = date.getDate()
-      if (!dailystats[userDate]){
-        dailystats[userDate] = 1
-      } else if (dailystats[userDate] > 0 ){
-        dailystats[userDate] = dailystats[userDate] + 1
-      }
-      let userMonth = date.getMonth()+1;
-      hashes_bymonth_dailystats[userMonth] = dailystats
-    })
+        var uniqDays = days_permonth.reduce(function(a,b){
+        if (a.indexOf(b) < 0 ) a.push(b);
+        return a;
+        },[]);
 
-    const thisMonthsData = hashes_bymonth_dailystats[mm]
+        console.log('num', uniqDays)
 
+        uniqDays.forEach((day) => {
+          // console.log("why not workin???", day, days[day].length)
+          days[day] = days[day].length
+        })
 
-    const array_data = [thisMonthsData[dd-6],thisMonthsData[dd-5],thisMonthsData[dd-4],thisMonthsData[dd-3],thisMonthsData[dd-2],thisMonthsData[dd-1],thisMonthsData[dd]]
+        // console.log('after', days[dd-1])
+        const array_display_data = [days[dd-6],days[dd-5],days[dd-4],days[dd-3],days[dd-2],days[dd-1],days[dd]]
+        console.log(array_display_data)
 
-
-    let monthlyData = array_data.map((element) => {
+      let weeklyData = array_display_data.map((element) => {
       if(!element) { return 0 }
       return element
-    })
-     console.log("hashes test", hashes_bymonth_dailystats)
+      })
 
-    this.series[0].data = monthlyData
-    console.log("MOnthly Data", monthlyData)
-
-
-    const weekly = [`${mm}/${dd -6}`, `${mm}/${dd -5}`, `${mm}/${dd -4}`, `${mm}/${dd -3}`, `${mm}/${dd - 2}`, `${mm}/${dd -1}`, `${mm}/${dd}`]
-
-    // this.chartOptions.xaxis.categories = weekly
-    console.log('xaxis test weeky ', weekly)
-
-
-    // const todaysData = thisMonthsData[dd]
-
-
-    // const prev1Data = thisMonthsData[dd - 1]
-    // console.log('test6',thisMonthsData[dd - 6])
-
-
-    // const prev2Data = thisMonthsData[dd - 2]
-
-    // const prev3Data = thisMonthsData[dd - 3]
-
-    // const prev4Data = thisMonthsData[dd - 4]
-
-    // const prev5Data = thisMonthsData[dd - 5]
-
-    // const prev6Data = thisMonthsData[dd - 6]
-
-    // console.log('series ',this.series[0].data)
-
-
-
-    // this.series[0].data = [prev6Data, prev5Data, prev4Data, prev3Data, prev2Data, prev1Data, todaysData]
-
-
+    this.series[0].data = weeklyData
+    console.log("weekly Data", weeklyData)
 
     },
+
+
+
+
 
     changeData() {
       setInterval(() => {
