@@ -11,11 +11,11 @@ Vue.component('apexchart', VueApexCharts)
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faChartBar, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faChartBar, faCoffee, faHistory, } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import { faChartBar } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faUserSecret, faChartBar, faCoffee)
+library.add(faUserSecret, faChartBar, faCoffee, faHistory)
 
 
 Vue.component('fa-icon', FontAwesomeIcon)
