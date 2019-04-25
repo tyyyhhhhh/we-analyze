@@ -69,7 +69,7 @@ export default {
 <style scoped lang="scss">
 .overallStats-Container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .innerBox {
@@ -79,24 +79,34 @@ export default {
 
 .outterBox {
   width: 120px;
+  background-color: white;
+  padding: 20px 30px ;
+  width: 240px;
+  text-align: left;
+  border: 1px solid #EAEAEA;
 }
+
+.outterBox p {
+  margin: 0 0 15px 0;
+}
+
 .chart-bar-success {
   color: #67c23a;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .chart-bar-warning {
   color: #e6a23c;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .chart-bar-danger {
   color: #f56c6c;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .history-icon-primary {
   color: #409eff;
-  font-size: 25px;
+  font-size: 30px;
 }
 </style>

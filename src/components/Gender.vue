@@ -1,13 +1,16 @@
 <template>
-  <div id="chart">
-    <h1>GenderStats:{{events.length}}</h1>
-    <apexchart
-      @click="genderStats"
-      type="donut"
-      width="380"
-      :options="chartOptions"
-      :series="series"
-    />
+
+  <div class="demog">
+    <h4>Gender Demographics</h4>
+    <div id="chart">
+      <apexchart
+        @click="genderStats"
+        type="donut"
+        width="380"
+        :options="chartOptions"
+        :series="series"
+      />
+    </div>
   </div>
 </template>
 
@@ -109,5 +112,12 @@ body {
 #chart {
   max-width: 650px;
   margin: 35px auto;
+}
+
+.demog {
+  background-color: white;
+  margin: 30px 0;
+  padding: 20px;
+  border: 1px solid #EAEAEA;
 }
 </style>

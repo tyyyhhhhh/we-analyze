@@ -1,17 +1,5 @@
 <template>
   <div class="home">
-    <h1>I am the parent</h1>
-
-    <Child :events="events"/>
-    <Map v-bind:mdata="map"/>
-    <Funnel v-bind:events="events"/>
-
-    <Child :events="events"></Child>
-    <Gender :users="users" :events="events"></Gender>
-    <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
-    <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
-
-    <h1>Here are the Overall Stats Components:</h1>
     <OverallStats
       v-if="events.length>0"
       :users="users"
@@ -19,8 +7,12 @@
       :validVisits="validVisits"
       :totalTimeSpent="totalTimeSpent"
     />
-
-    <DailyStats v-if="events.length>0" :users="users" :events="events"/>
+    <div class="dailystats">
+      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+      <Gender :users="users" :events="events"></Gender>
+    </div>
+    <Map v-bind:mdata="map"/>
+    <Funnel v-bind:events="events"/>
   </div>
 </template>
 
@@ -34,11 +26,12 @@ import Child from "@/components/Child";
 import Map from "@/components/Map";
 import Funnel from "@/components/Funnel";
 
+import Map from "@/components/Map";
+import Funnel from "@/components/Funnel";
+
 import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
 import OverallStats from "@/components/OverallStats";
-
-// import DailyStats from '@/components/DailyStats'
 import DailyStatsUV from "@/components/DailyStatsUV";
 
 // ES6
@@ -75,10 +68,10 @@ export default {
   },
 
   mounted() {
-    setInterval(() => {
-      this.loadTotalVisitsData();
-      this.loadData();
-    }, 3000);
+    // setInterval(() => {
+    this.loadTotalVisitsData();
+    this.loadData();
+    // }, 3000);
   },
   // Methods are called once
   methods: {
@@ -87,10 +80,18 @@ export default {
         let data = response.data.users;
         this.map = data;
       }),
-        axios.get("http://localhost:3000/api/v1/events").then(response => {
-          let data = response.data.events;
-          this.events = data;
-        }),
+        axios
+          .get("http://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
+        axios
+          .get("http://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
         axios
           .get("https://haoshihui.wogengapp.cn/api/v1/events")
           .then(response => {
@@ -133,7 +134,7 @@ export default {
           data.events.forEach(event => {
             if (event.description === "customerOpenApp") {
               initSession = event;
-              console.log("initSession", initSession);
+              //console.log("initSession", initSession);
             }
             if (
               event.description === "customerLeft" &&
@@ -173,5 +174,10 @@ export default {
 
 
 <style>
+.dailystats {
+  display: flex;
+  justify-content: space-between;
+  height: 550px;
+}
 </style>
 
