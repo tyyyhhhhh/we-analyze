@@ -1,55 +1,69 @@
 <template>
   <div class="home">
-    <Navbar/>
-    <OverallStats
-      v-if="events.length>0"
-      :users="users"
-      :totalVisits="totalVisits"
-      :validVisits="validVisits"
-      :totalTimeSpent="totalTimeSpent"
-    />
-    <div class="dailystats">
-      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
-      <Gender :users="users" :events="events"></Gender>
+    <div class="wrapper">
+      <el-row class="bg-white">
+        <el-col :span="12">
+          <el-row class="action-items">
+            <el-col :span="4" class="x-right">
+              <img id="logo" src="../assets/icon.png">
+            </el-col>
+            <el-col :span="4" class="x-left">
+              <div id="logo-title">WeAnalyze</div>
+            </el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="12">
+          <el-row class="action-items">
+            <el-col :span="6"></el-col>
+            <el-col :span="6"></el-col>
+            <el-col :span="6"></el-col>
+            <el-col :span="6">
+              <img class="user-avatar" src="../assets/Adrien.jpeg" alt>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
     </div>
-    <Map v-bind:mdata="map"/>
-    <Funnel v-bind:events="events"/>
+    <div class="d-container">
+      <OverallStats
+        v-if="events.length>0"
+        :users="users"
+        :totalVisits="totalVisits"
+        :validVisits="validVisits"
+        :totalTimeSpent="totalTimeSpent"
+      />
+      <div class="dailystats">
+        <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+        <Gender :users="users" :events="events"></Gender>
+      </div>
+      <Map v-bind:mdata="map"/>
+      <Funnel v-bind:events="events"/>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
-import HelloWorld from "@/components/HelloWorld.vue";
 import axios from "axios";
-import Child from "@/components/Child";
 import Map from "@/components/Map";
 import Funnel from "@/components/Funnel";
 import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
 import OverallStats from "@/components/OverallStats";
 import DailyStatsUV from "@/components/DailyStatsUV";
-import Navbar from "@/components/Navbar";
-
-// ES6
-// import name from 'path/to/file'
-// ES5
-// const name = require('path/to/file')
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
-    Child,
-
     Map,
     Funnel,
     Gender,
-
     OverallStats,
-    // DailyStats,
-    DailyStatsUV,
-    Navbar
+    DailyStatsUV
   },
   // Data object scoped to a component
   data() {
@@ -172,6 +186,59 @@ export default {
 
 
 <style>
+.d-container {
+  margin: 5px 45px;
+}
+
+.wrapper {
+  background: white;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.action-items {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.x-left {
+  text-align: left;
+}
+.x-right {
+  text-align: right;
+}
+.x-center {
+  text-align: center;
+}
+.y-center {
+  vertical-align: center;
+}
+.bg-white {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#logo-title {
+  font-weight: bold;
+  font-size: 165%;
+}
+
+#logo {
+  height: 60%;
+  width: 60%;
+  padding: 20px 5px;
+  object-fit: contain;
+}
+
+.user-avatar {
+  height: 40%;
+  width: 40%;
+  padding: 20px 5px;
+  object-fit: contain;
+  border-radius: 50%;
+}
 .dailystats {
   display: flex;
   justify-content: space-between;
