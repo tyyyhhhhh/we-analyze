@@ -1,19 +1,18 @@
 <template>
-  <div id="nav">
-    <div class="company">
-      <img
-        class="logo"
-        src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
-        alt
-      >
-      <div class="compname">WeAnalyze</div>
+  <div id="topbar" class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <div>
+        <img id="logo" src="../assets/icon.png" alt>
+      </div>
+      <h2>WeAnalyze</h2>
     </div>
-    <div>
-      <img
-        class="avatar"
-        src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
-        alt
-      >
+    <div id="features" class="d-flex">
+      <h5 class="item">Contact us</h5>
+      <h5 class="item">Solution</h5>
+      <h5 class="item">Features</h5>
+      <div>
+        <b-button class="item" variant="outline-primary">Sign up</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -26,53 +25,22 @@ export default {
 </script>
 
 <style lang="scss">
-#nav {
+#topbar {
+  height: 80px;
   background-color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  height: 50px;
-  overflow: hidden;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eaeaea;
+}
 
-  height: 70px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+#features {
+  padding-top: 10px;
+  .item {
+    padding: 3px 12px;
   }
 }
 
-body {
-  margin: 0px;
-  background-color: #f9fafb;
-}
-
-.avatar {
-  border-radius: 50%;
-  width: 50px;
-  border: 1px solid grey;
-}
-
-.company {
-  display: flex;
-  justify-content: space-between;
-  font-size: 25px;
-  font-weight: bold;
-  position: relative;
-  margin: 0 0 0 15px;
-}
-
-.compname {
-  position: absolute;
-  top: 10px;
-  left: 55px;
-}
-
-.logo {
-  width: 50px;
+#logo {
+  height: 30%;
+  width: 30%;
+  padding: 0;
+  object-fit: contain;
 }
 </style>
