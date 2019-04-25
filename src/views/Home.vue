@@ -8,9 +8,8 @@
 
     <Child :events="events"></Child>
     <Gender :users="users" :events="events"></Gender>
-     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
-      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
-
+    <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
+    <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
 
     <h1>Here are the Overall Stats Components:</h1>
     <OverallStats
@@ -30,6 +29,8 @@
 // @ is an alias to /src
 
 
+
+
 import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 import Child from '@/components/Child'
@@ -41,9 +42,9 @@ import Funnel from '@/components/Funnel'
 import Gender from '@/components/Gender'
 import ApexCharts from 'apexcharts'
 import OverallStats from '@/components/OverallStats'
-// import DailyStats from '@/components/DailyStats'
-import DailyStatsUV from '@/components/DailyStatsUV'
 
+// import DailyStats from '@/components/DailyStats'
+import DailyStatsUV from "@/components/DailyStatsUV";
 
 // ES6
 // import name from 'path/to/file'
@@ -102,7 +103,7 @@ export default {
         }),
 
       axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
+        .get("https://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
           let data = response.data.events;
           this.events = data;
@@ -125,7 +126,7 @@ export default {
 
     loadTotalVisitsData() {
       axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
+        .get("https://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
           let data = response.data;
           let totalVisits = 0;
