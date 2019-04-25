@@ -22,13 +22,8 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import axios from "axios";
 import Child from "@/components/Child";
-
 import Map from "@/components/Map";
 import Funnel from "@/components/Funnel";
-
-import Map from "@/components/Map";
-import Funnel from "@/components/Funnel";
-
 import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
 import OverallStats from "@/components/OverallStats";
