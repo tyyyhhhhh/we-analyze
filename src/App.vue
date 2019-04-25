@@ -2,6 +2,7 @@
   <div id="app">
 
 
+
     <div id="nav">
       <div class="company">
         <img class="logo" src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg" alt="">
@@ -16,6 +17,7 @@
     <div class="container">
       <router-view/>
     </div>
+
   </div>
 </template>
 
