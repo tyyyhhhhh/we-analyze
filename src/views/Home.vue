@@ -80,10 +80,10 @@ export default {
   },
 
   mounted() {
-    setInterval(() => {
+    // setInterval(() => {
       this.loadTotalVisitsData();
       this.loadData();
-    }, 3000);
+    // }, 3000);
   },
   // Methods are called once
   methods: {
@@ -94,7 +94,7 @@ export default {
           this.map = data
 
         }),
-      axios.get('http://localhost:3000/api/v1/events')
+      axios.get('http://haoshihui.wogengapp.cn/api/v1/events')
         .then((response) => {
           let data = response.data.events
           this.events = data

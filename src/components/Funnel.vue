@@ -50,7 +50,7 @@ export default {
     computed: {
         funnelData(){
             this.chartData.nodes.push({name: undefined})
-            //console.log(this.chartData.links)
+            console.log(this.chartData.links)
             const userSession = []
 
 
@@ -67,7 +67,7 @@ export default {
 
                                 if ((_.find(this.chartData.nodes, {name: event.page}))=== undefined){
                                     this.chartData.nodes.push({name: event.page})
-                                    //console.log(this.chartData.nodes)
+                                    console.log(this.chartData.nodes)
                                 }
 
 
@@ -89,7 +89,7 @@ export default {
                                         this.chartData.links.push({source: userSession[pageIndex - 1] || undefined, target: userSession[pageIndex], value: 1})
                                     }
                                 })
-                                //console.log(userSession.length)
+                                console.log(userSession.length)
             return this.chartData
         }
     }
