@@ -19,10 +19,7 @@
 
 <script>
 // @ is an alias to /src
-
-import HelloWorld from "@/components/HelloWorld.vue";
 import axios from "axios";
-import Child from "@/components/Child";
 import Map from "@/components/Map";
 import Funnel from "@/components/Funnel";
 import Gender from "@/components/Gender";
@@ -31,23 +28,13 @@ import OverallStats from "@/components/OverallStats";
 import DailyStatsUV from "@/components/DailyStatsUV";
 import Navbar from "@/components/Navbar";
 
-// ES6
-// import name from 'path/to/file'
-// ES5
-// const name = require('path/to/file')
-
 export default {
   name: "home",
   components: {
-    HelloWorld,
-    Child,
-
     Map,
     Funnel,
     Gender,
-
     OverallStats,
-    // DailyStats,
     DailyStatsUV,
     Navbar
   },

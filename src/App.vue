@@ -1,5 +1,24 @@
 <template>
   <div id="app">
+    <div id="nav">
+      <div class="company">
+        <img
+          class="logo"
+          src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
+          alt
+        >
+        <div class="compname">WeAnalyze</div>
+      </div>
+      <div>
+        <img
+          class="avatar"
+          src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
+          alt
+        >
+      </div>
+      <!--  <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>-->
+    </div>
     <div class="scontainer">
       <router-view/>
     </div>
