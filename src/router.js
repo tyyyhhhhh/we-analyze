@@ -27,8 +27,10 @@ export default new Router({
       component: OverallStats
     },
     {
+
       path: '/dailystatsuv',
       name: 'daily stats uv',
+
       component: DailyStatsUV
     },
 
