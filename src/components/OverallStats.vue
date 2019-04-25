@@ -78,10 +78,9 @@ export default {
 }
 
 .outterBox {
-  width: 120px;
   background-color: white;
   padding: 20px 30px;
-  width: 240px;
+  width: 260px;
   text-align: left;
   border: 1px solid #eaeaea;
 }

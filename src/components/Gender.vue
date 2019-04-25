@@ -113,7 +113,7 @@ body {
 
 #chart {
   max-width: 650px;
-  margin: 35px auto;
+  margin: 60px auto;
 }
 
 .demog {
