@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div id="topbar" class="d-flex justify-content-between">
-      <div class="d-flex">
-        <img id="logo" src="../assets/icon.png" alt>
+    <div id="topbar" class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <div>
+          <img id="logo" src="../assets/icon.png" alt>
+        </div>
         <h2>WeAnalyze</h2>
       </div>
       <div id="features" class="d-flex">
@@ -94,6 +96,7 @@
 }
 #topbar {
   height: 100px;
+  background-color: white;
 }
 #main-button {
   margin: 40px;

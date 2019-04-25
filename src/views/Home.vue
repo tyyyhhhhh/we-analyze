@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Navbar/>
     <OverallStats
       v-if="events.length>0"
       :users="users"
@@ -28,6 +29,7 @@ import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
 import OverallStats from "@/components/OverallStats";
 import DailyStatsUV from "@/components/DailyStatsUV";
+import Navbar from "@/components/Navbar";
 
 // ES6
 // import name from 'path/to/file'
@@ -46,7 +48,8 @@ export default {
 
     OverallStats,
     // DailyStats,
-    DailyStatsUV
+    DailyStatsUV,
+    Navbar
   },
   // Data object scoped to a component
   data() {
