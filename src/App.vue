@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-
-
-
     <div id="nav">
       <div class="company">
         <img class="logo" src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg" alt="">
@@ -17,7 +14,6 @@
     <div class="container">
       <router-view/>
     </div>
-
   </div>
 </template>
 
@@ -28,6 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   text-align: center;
+  background-color: #F9FAFB;
 
 }
 #nav {
@@ -38,6 +35,8 @@
   height: 50px;
   overflow: hidden;
   border-bottom: 1px solid #EAEAEA;
+
+  height: 70px;
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -59,7 +58,7 @@ body {
 }
 
 .container {
-  margin: 50px 80px;
+  margin: 50px 70px;
 }
 
 .company {
