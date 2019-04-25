@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Navbar/>
     <OverallStats
       v-if="events.length>0"
       :users="users"
@@ -7,49 +8,33 @@
       :validVisits="validVisits"
       :totalTimeSpent="totalTimeSpent"
     />
-
-  <div class="dailystats">
-    <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
-    <Gender v-if="users.length>0" :users="users" :events="events"></Gender>
-  </div>
-    <Map v-bind:mdata="map" />
-    <Funnel v-bind:events="events" />
-
-
-
-     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
-
-
-
-
-
-
+    <div class="dailystats">
+      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+      <Gender :users="users" :events="events"></Gender>
+    </div>
+    <Map v-bind:mdata="map"/>
+    <Funnel v-bind:events="events"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-
-import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios'
-import Child from '@/components/Child'
-
-import Map from '@/components/Map'
-import Funnel from '@/components/Funnel'
-
-
-import Gender from '@/components/Gender'
-import ApexCharts from 'apexcharts'
-import OverallStats from '@/components/OverallStats'
-import DailyStatsUV from '@/components/DailyStatsUV'
-
+import HelloWorld from "@/components/HelloWorld.vue";
+import axios from "axios";
+import Child from "@/components/Child";
+import Map from "@/components/Map";
+import Funnel from "@/components/Funnel";
+import Gender from "@/components/Gender";
+import ApexCharts from "apexcharts";
+import OverallStats from "@/components/OverallStats";
+import DailyStatsUV from "@/components/DailyStatsUV";
+import Navbar from "@/components/Navbar";
 
 // ES6
 // import name from 'path/to/file'
 // ES5
 // const name = require('path/to/file')
-
 
 export default {
   name: "home",
@@ -63,7 +48,8 @@ export default {
 
     OverallStats,
     // DailyStats,
-    DailyStatsUV
+    DailyStatsUV,
+    Navbar
   },
   // Data object scoped to a component
   data() {
@@ -81,32 +67,35 @@ export default {
 
   mounted() {
     // setInterval(() => {
-      this.loadTotalVisitsData();
-      this.loadData();
+    this.loadTotalVisitsData();
+    this.loadData();
     // }, 3000);
   },
   // Methods are called once
   methods: {
     loadData() {
-            axios.get('http://haoshihui.wogengapp.cn/api/v1/users')
-        .then((response) => {
-          let data = response.data.users
-          this.map = data
-
-        }),
-      axios.get('http://haoshihui.wogengapp.cn/api/v1/events')
-        .then((response) => {
-          let data = response.data.events
-          this.events = data
-
-        }),
-
-      axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
-        .then(response => {
-          let data = response.data.events;
-          this.events = data;
-        }),
+      axios.get("http://haoshihui.wogengapp.cn/api/v1/users").then(response => {
+        let data = response.data.users;
+        this.map = data;
+      }),
+        axios
+          .get("http://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
+        axios
+          .get("http://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
+        axios
+          .get("https://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
         axios
           .get("https://haoshihui.wogengapp.cn/api/v1/users")
           .then(response => {
@@ -125,7 +114,7 @@ export default {
 
     loadTotalVisitsData() {
       axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
+        .get("https://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
           let data = response.data;
           let totalVisits = 0;
@@ -183,7 +172,6 @@ export default {
 
 
 <style>
-
 .dailystats {
   display: flex;
   justify-content: space-between;
@@ -194,6 +182,5 @@ body {
   margin: 0px;
   background-color: #F9FAF;
 }
-
 </style>
 

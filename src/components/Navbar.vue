@@ -1,20 +1,31 @@
 <template>
-  <div id="app">
-    <div class="scontainer">
-      <router-view/>
+  <div id="nav">
+    <div class="company">
+      <img
+        class="logo"
+        src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
+        alt
+      >
+      <div class="compname">WeAnalyze</div>
+    </div>
+    <div>
+      <img
+        class="avatar"
+        src="https://img.freepik.com/free-vector/man-eating-pasta_1087-14.jpg?size=338&ext=jpg"
+        alt
+      >
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  name: "Navbar",
+  props: {}
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  text-align: center;
-  background-color: #f9fafb;
-}
 #nav {
   background-color: white;
   display: flex;
@@ -22,6 +33,7 @@
   padding: 10px;
   height: 50px;
   overflow: hidden;
+  margin-bottom: 30px;
   border-bottom: 1px solid #eaeaea;
 
   height: 70px;
@@ -43,11 +55,6 @@ body {
   border-radius: 50%;
   width: 50px;
   border: 1px solid grey;
-}
-
-.scontainer {
-  // margin: 50px 80px;
-  width: 100%;
 }
 
 .company {
