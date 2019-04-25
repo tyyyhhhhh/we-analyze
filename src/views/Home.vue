@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <h1>I am the parent</h1>
+
+    <Child :events="events"/>
+    <Map v-bind:mdata="map"/>
+    <Funnel v-bind:events="events"/>
+
     <Child :events="events"></Child>
     <Gender :users="users" :events="events"></Gender>
     <!--     <DailyStats v-if="events.length>0" :users="users" :events="events"/> -->
@@ -25,9 +30,14 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import axios from "axios";
 import Child from "@/components/Child";
+
+import Map from "@/components/Map";
+import Funnel from "@/components/Funnel";
+
 import Gender from "@/components/Gender";
 import ApexCharts from "apexcharts";
 import OverallStats from "@/components/OverallStats";
+
 // import DailyStats from '@/components/DailyStats'
 import DailyStatsUV from "@/components/DailyStatsUV";
 
@@ -41,6 +51,9 @@ export default {
   components: {
     HelloWorld,
     Child,
+
+    Map,
+    Funnel,
     Gender,
 
     OverallStats,
@@ -52,6 +65,7 @@ export default {
     return {
       title: null,
       events: [],
+      map: [],
       users: [],
       totalVisits: 0,
       validVisits: 0,
@@ -69,12 +83,20 @@ export default {
   // Methods are called once
   methods: {
     loadData() {
-      axios
-        .get("https://haoshihui.wogengapp.cn/api/v1/events")
-        .then(response => {
+      axios.get("http://haoshihui.wogengapp.cn/api/v1/users").then(response => {
+        let data = response.data.users;
+        this.map = data;
+      }),
+        axios.get("http://localhost:3000/api/v1/events").then(response => {
           let data = response.data.events;
           this.events = data;
         }),
+        axios
+          .get("https://haoshihui.wogengapp.cn/api/v1/events")
+          .then(response => {
+            let data = response.data.events;
+            this.events = data;
+          }),
         axios
           .get("https://haoshihui.wogengapp.cn/api/v1/users")
           .then(response => {
