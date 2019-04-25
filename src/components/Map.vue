@@ -137,4 +137,11 @@ export default {
 .jvectormap-container {
     height: 300px;
 }
+
+.map-container {
+  background-color: white;
+  padding: 20px 0;
+  height: 350px;
+  border: 1px solid #EAEAEA;
+}
 </style>
