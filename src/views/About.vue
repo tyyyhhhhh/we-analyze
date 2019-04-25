@@ -37,38 +37,45 @@
 
     <div id="main-container">
       <div class="text-middle">
-        <h1>Understand your customers. Boost your miniprogram.</h1>
+       <!--  <h1>Understand your customers. </h1> -->
+          <h1 id="h1bold">Boost your Mini Program.</h1>
         <h5>Analyze customer behaviours on your app through reliable live data.</h5>
-        <b-button id="main-button" variant="primary">Implement in 5 mins</b-button>
+        <a href="home" id="main-button" class="btn btn-primary" role="button">Implement in 5 mins</a>
       </div>
-      <div id="video-container"></div>
+
+      <div id="video-container">
+        <video src="../assets/introvid.mp4" controls></video>
+      </div>
+
+      <div>
+        <img id="spin" src="../assets/Component 2.png" alt>
+        <h2>Iterate</h2>
+      </div>
+
+      <div class="d-flex justify-content-around secondary-box">
+        <div class="left-box d-flex">
+          <div class="box-text">
+            <h3>Measure</h3>
+            <p>Get real time, accurate data that matters for your business.</p>
+          </div>
+          <img class="graphimg" src="../assets/Component.png" alt>
+        </div>
+        <div class="left-box d-flex">
+          <div class="box-text">
+            <h3>Optimize</h3>
+            <p>Change your app and see the effect on your KPIs: conversions, acquisitions, bounce rate etc...</p>
+          </div>
+          <img class="phoneimg" src="../assets/image.png" alt>
+        </div>
+      </div>
     </div>
 
-    <div>
-      <img id="spin" src="../assets/Component 2.png" alt>
-      <h2>Iterate</h2>
-    </div>
-    <div class="d-flex justify-content-around secondary-box">
-      <div id="left-box" class="d-flex">
-        <div>
-          <h3>Measure</h3>
-          <p>Get real time, accurate data that matters for your business.</p>
-        </div>
-        <img id="graph" src="../assets/Component.png" alt>
-      </div>
-      <div id="left-box" class="d-flex">
-        <div>
-          <h3>Optimize</h3>
-          <p>Change your app and see the effect on your KPIs: conversions, acquisitions, bounce rate etc...</p>
-        </div>
-        <img id="graph" src="../assets/image.png" alt>
+      <div id="footer">
+        <h2 id="footer-text">What will your data teach you about your business?</h2>
+        <button type="button" class="btn btn-outline-light">Find out now</button>
       </div>
     </div>
-    <div id="footer">
-      <h2 id="footer-text">What will your data teach you about your business?</h2>
-      <button type="button" class="btn btn-outline-light">Find out now</button>
-    </div>
-  </div>
+
 </template>
 
 
@@ -76,6 +83,10 @@
 .wrapper {
   background: white;
   height: 80px;
+}
+
+#h1bold {
+  font-size: 60px;
 }
 
 .action-items {
@@ -121,15 +132,27 @@
 #footer {
   background-color: #4c8ced;
   height: 150px;
-  margin: 0;
+  margin: 10px 0 0 0;
 }
-#left-box {
-  width: 30vw;
-  height: 20vh;
+
+.left-box {
+  width: 400px;
 }
-#graph {
-  object-fit: contain;
+
+.box-text {
+  width: 280px;
+}
+
+.graphimg {
   padding: 20px;
+  width: 200px;
+  height: 140px;
+}
+
+.phoneimg {
+  width: 110px;
+  padding: 20px;
+  height: 140px;
 }
 .secondary-box {
   padding-top: 30px;
@@ -137,12 +160,9 @@
   margin: 0 auto;
 }
 #spin {
-  margin: 10px;
+  margin: 50px 0 20px 0;
 }
 #video-container {
-  width: 70vw;
-  height: 30vh;
-  background-color: #c4c4c4;
   margin: 0 auto;
   border-radius: 3px;
 }
@@ -150,9 +170,8 @@
   padding-top: 40px;
 }
 #main-container {
-  background-color: #fbfafa;
-  height: 70vh;
-  margin: 0;
+  margin: 0 auto;
+  width: 75vw;
 }
 
 #main-button {

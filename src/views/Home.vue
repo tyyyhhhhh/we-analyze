@@ -28,6 +28,7 @@
         </el-col>
       </el-row>
     </div>
+
     <div class="d-container">
       <OverallStats
         v-if="events.length>0"
@@ -187,7 +188,8 @@ export default {
 
 <style>
 .d-container {
-  margin: 5px 45px;
+  width: 76vw;
+  margin: 30px auto;
 }
 
 .wrapper {
@@ -242,7 +244,7 @@ export default {
 .dailystats {
   display: flex;
   justify-content: space-between;
-  height: 550px;
+  height: 530px;
 }
 
 body {
