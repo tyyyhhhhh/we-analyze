@@ -66,7 +66,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped lang="scss">
 .overallStats-Container {
   display: flex;
   justify-content: space-around;

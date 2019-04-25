@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Gender from './components/Gender.vue'
-import DailyStats from './components/DailyStats.vue'
+import DailyStatsUV from './components/DailyStatsUV.vue'
 import OverallStats from './components/OverallStats'
 
 
@@ -27,9 +27,9 @@ export default new Router({
       component: OverallStats
     },
     {
-      path: '/dailystats',
-      name: 'daily stats',
-      component: DailyStats
+      path: '/dailystatsuv',
+      name: 'daily stats uv',
+      component: DailyStatsUV
     },
 
     {
