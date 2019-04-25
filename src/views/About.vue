@@ -1,21 +1,40 @@
 <template>
   <div>
-    <div id="topbar" class="d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <div>
-          <img id="logo" src="../assets/icon.png" alt>
-        </div>
-        <h2>WeAnalyze</h2>
-      </div>
-      <div id="features" class="d-flex">
-        <h5 class="item">Contact us</h5>
-        <h5 class="item">Solution</h5>
-        <h5 class="item">Features</h5>
-        <div>
-          <b-button class="item" variant="outline-primary">Sign up</b-button>
-        </div>
-      </div>
+    <div class="wrapper">
+      <el-row class="bg-white">
+        <el-col :span="12">
+          <el-row class="action-items">
+            <el-col :span="4" class="x-right">
+              <img id="logo" src="../assets/icon.png">
+            </el-col>
+            <el-col :span="4" class="x-left">
+              <div id="logo-title">WeAnalyze</div>
+            </el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+            <el-col :span="4"></el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="12">
+          <el-row class="action-items">
+            <el-col :span="6">
+              <div>Contact us</div>
+            </el-col>
+            <el-col :span="6">
+              <div>Solution</div>
+            </el-col>
+            <el-col :span="6">
+              <div>Features</div>
+            </el-col>
+            <el-col :span="6">
+              <b-button variant="outline-primary">Sign up</b-button>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
     </div>
+
     <div id="main-container">
       <div class="text-middle">
         <h1>Understand your customers. Boost your miniprogram.</h1>
@@ -53,7 +72,48 @@
 </template>
 
 
-<style>
+<style lang="scss">
+.wrapper {
+  background: white;
+  height: 80px;
+}
+
+.action-items {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.x-left {
+  text-align: left;
+}
+.x-right {
+  text-align: right;
+}
+.x-center {
+  text-align: center;
+}
+.y-center {
+  vertical-align: center;
+}
+.bg-white {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#logo-title {
+  font-weight: bold;
+  font-size: 165%;
+}
+
+#logo {
+  height: 60%;
+  width: 60%;
+  padding: 20px 5px;
+  object-fit: contain;
+}
+
 #footer-text {
   color: white;
   padding: 20px;
@@ -94,54 +154,11 @@
   height: 70vh;
   margin: 0;
 }
-#topbar {
-  height: 100px;
-  background-color: white;
-}
+
 #main-button {
   margin: 40px;
   padding: 10px;
   padding-left: 40px;
   padding-right: 40px;
-}
-#features {
-  padding-top: 10px;
-}
-#features .item {
-  padding: 3px 12px;
-}
-
-#logo-container {
-  padding: 0px;
-}
-#title {
-  margin: 0px;
-}
-#logo {
-  height: 40%;
-  width: 40%;
-  padding: 0;
-  object-fit: contain;
-}
-.margin-right {
-  margin-right: 20px;
-}
-
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 20px 0;
-  background-color: #f9fafc;
 }
 </style>
