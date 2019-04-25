@@ -174,5 +174,10 @@ export default {
   justify-content: space-between;
   height: 550px;
 }
+
+body {
+  margin: 0px;
+  background-color: #F9FAF;
+}
 </style>
 

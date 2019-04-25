@@ -32,6 +32,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   text-align: center;
+  background-color: #f9fafb;
 }
 #nav {
   background-color: white;
@@ -41,6 +42,8 @@
   height: 50px;
   overflow: hidden;
   border-bottom: 1px solid #eaeaea;
+
+  height: 70px;
   a {
     font-weight: bold;
     color: #2c3e50;

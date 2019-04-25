@@ -3,7 +3,7 @@
   <div class="bg-forchart">
       <h4>Daily Statistics by the Week</h4>
    <div id="chart">
-      <apexchart type=line height=350 :options="chartOptions" :series="series" />
+      <apexchart v-if="dailyStatistics" type=line height=350 :options="chartOptions" :series="dailyStatistics" />
     </div>
   </div>
 </template>
@@ -40,8 +40,8 @@ export default {
    data() {
     return {
         series: [{
-            name: "Desktops",
-            data: [0, 0, 0, 0, 0, 0, 0]
+            name: "Mini Program",
+            data: []
         }],
 
         chartOptions: {
@@ -121,7 +121,7 @@ export default {
         })
 
         // console.log('after', days[dd-1])
-        const array_display_data = [days[dd-6],days[dd-5],days[dd-4],days[dd-3],days[dd-2],days[dd-1],days[dd]]
+        const array_display_data = [3, 8, 4, 6, 7,days[dd-1],days[dd]]
         console.log(array_display_data)
 
       let weeklyData = array_display_data.map((element) => {
@@ -129,8 +129,11 @@ export default {
       return element
       })
 
-    this.series[0].data = weeklyData
-    console.log("weekly Data", weeklyData)
+
+      this.series[0].data = weeklyData
+      const changedData = this.series
+      console.log("weekly Data working?", changedData)
+      return changedData
 
     },
   },
@@ -164,11 +167,10 @@ export default {
 
 .bg-forchart {
   background-color: white;
-  width: 800px;
-  padding: 10px;
+  padding: 20px;
   margin: 30px 0;
   border: 1px solid #EAEAEA;
-
+  width: 650px;
 }
 
 </style>
