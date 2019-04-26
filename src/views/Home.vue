@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+
     <div class="wrapper">
       <el-row class="bg-white">
         <el-col :span="12">
@@ -89,33 +90,13 @@ export default {
   // Methods are called once
   methods: {
     loadData() {
-      axios.get("http://haoshihui.wogengapp.cn/api/v1/users").then(response => {
-        let data = response.data.users;
-        this.map = data;
-      }),
-        axios
-          .get("http://haoshihui.wogengapp.cn/api/v1/events")
-          .then(response => {
-            let data = response.data.events;
-            this.events = data;
-          }),
-        axios
-          .get("http://haoshihui.wogengapp.cn/api/v1/events")
-          .then(response => {
-            let data = response.data.events;
-            this.events = data;
-          }),
-        axios
-          .get("https://haoshihui.wogengapp.cn/api/v1/events")
-          .then(response => {
-            let data = response.data.events;
-            this.events = data;
-          }),
+
         axios
           .get("https://haoshihui.wogengapp.cn/api/v1/users")
           .then(response => {
             let data = response.data.users;
             this.users = data;
+                      this.map = data
             let validVisits = 0;
             data.forEach(user => {
               if (user.nickName) {
@@ -132,6 +113,8 @@ export default {
         .get("https://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
           let data = response.data;
+                    this.events = data.events
+
           let totalVisits = 0;
           data.events.forEach(event => {
             if (event.description === "customerOpenApp") {
