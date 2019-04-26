@@ -38,12 +38,16 @@
         :validVisits="validVisits"
         :totalTimeSpent="totalTimeSpent"
       />
+
+
+      <Funnel v-bind:events="events" v-if="events.length>0"/>
+
       <div class="dailystats">
-        <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+        <Map v-bind:mdata="map" v-if="events.length>0"/>
         <Gender :users="users" :events="events"></Gender>
       </div>
-      <Map v-bind:mdata="map" v-if="events.length>0"/>
-      <Funnel v-bind:events="events" v-if="events.length>0"/>
+
+      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
     </div>
   </div>
 </template>
@@ -227,7 +231,6 @@ export default {
 .dailystats {
   display: flex;
   justify-content: space-between;
-  height: 530px;
 }
 
 body {
