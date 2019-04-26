@@ -40,14 +40,16 @@
       />
 
 
-      <Funnel v-bind:events="events" v-if="events.length>0"/>
+      <Funnel :key="funnelKey" v-bind:events="funnelChart" v-if="funnelChart.length>0"/>
 
       <div class="dailystats">
-        <Map v-bind:mdata="map" v-if="events.length>0"/>
+        <Map  v-bind:mdata="map" v-if="events.length>0"/>
         <Gender :users="users" :events="events"></Gender>
       </div>
 
+
       <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+
     </div>
   </div>
 </template>
@@ -81,18 +83,102 @@ export default {
       totalVisits: 0,
       validVisits: 0,
       averageTimeSpent: 0,
-      totalTimeSpent: 0
+      totalTimeSpent: 0,
+      mapKey: 0,
+      funnelKey: 0,
+      funnelChart: []
     };
   },
 
   mounted() {
-    // setInterval(() => {
+    setInterval(() => {
     this.loadTotalVisitsData();
     this.loadData();
-    // }, 3000);
+    }, 3000);
   },
   // Methods are called once
   methods: {
+          sankeyChart() {
+            let rankedPages = {
+  "pages/newcustomer/newcustomer": 1,
+  "pages/shops/shops": 2,
+  "pages/shop/shop": 3,
+  "map/map": 4,
+  "pages/newshop/new": 5,
+  "pages/payment/payment": 6
+}
+let arr = []
+let cleanArr = []
+        let users = (_.groupBy(this.events, (event) => { return event.user_open_id }))
+        let userAllSessions = Object.values(users)
+        let finalArr = []
+        userAllSessions.forEach((userSessions) => {
+          let OrderedEvents = (_.sortBy(userSessions, (event) =>{return event.timestamp}))
+          OrderedEvents.forEach((event) => {
+            let nextEvent = _.findIndex(OrderedEvents, event) + 1 
+              event && OrderedEvents[nextEvent] && arr.push({ from: event.page, to: OrderedEvents[nextEvent].page, value: 1, source_description: event.description, target_description: OrderedEvents[nextEvent].description })
+
+            //  else if(event == null && OrderedEvents[nextEvent] != null) {
+            //    console.log("TEST C")
+            //    console.log(OrderedEvents[nextEvent])
+            //   arr.push({ from: "Opened the app", to: OrderedEvents[nextEvent].page, value: 1 })
+            // } else {
+            //   console.log("TEST D")
+
+            //    && arr.push({ from: event.page , to: OrderedEvents[nextEvent].page, value: 1 })
+            })
+
+            
+         })
+         let testObj = {}
+          arr.forEach((element) => {
+            if (testObj[`${element.from} + ${element.to}`]) {} else {
+              testObj[`${element.from} + ${element.to}`] = 1
+            }
+            if(element.from == null && element.source_description !== "customerOpenApp" ){
+
+            } else if (element.to == null && element.target_description !== "customerLeft"){
+
+            } else if (element.to === element.from){
+
+            }
+            else {
+              
+              if (_.find(cleanArr, {from: element.from, to: element.to, value: element.value})){
+                _.pull(cleanArr, element)
+
+                testObj[`${element.from} + ${element.to}`] ++
+                element.value ++
+
+              } else {
+                cleanArr.push({from: element.from, to: element.to, value: element.value})
+              }
+              
+            }
+          })
+          Object.entries(testObj).forEach(([key, value]) => {
+            
+            let newArr = (_.split(key, ' + '))
+            if(newArr[0] !== newArr[1]){
+              if(newArr[0] === "null"){
+                newArr[0] = "Landing"
+              } else if(newArr[1] === "null") {
+                newArr[1] = "Left"
+              }
+              if (rankedPages[newArr[0]] < rankedPages[newArr[1]]) {
+              finalArr.push({from: newArr[0], to: newArr[1], value: value})
+              }
+              
+            } 
+            
+            }
+          )
+
+          // console.log(finalArr)
+           this.funnelChart = finalArr
+
+
+        },
     loadData() {
 
         axios
@@ -108,7 +194,7 @@ export default {
               }
             });
             this.validVisits = validVisits;
-            console.log("Valid visits", validVisits);
+            // console.log("Valid visits", validVisits);
           });
     },
 
@@ -118,6 +204,10 @@ export default {
         .then(response => {
           let data = response.data;
                     this.events = data.events
+
+this.sankeyChart()
+this.mapKey = this.mapKey == 0 ? 1:0
+this.funnelKey = this.funnelKey == 0 ? 1:0
 
           let totalVisits = 0;
           data.events.forEach(event => {
@@ -141,21 +231,21 @@ export default {
               event.user_open_id === initSession.user_open_id
             ) {
               endSession = event;
-              console.log("endSession", endSession);
+              // console.log("endSession", endSession);
 
               timeSpent =
                 parseInt(endSession.timestamp) -
                 parseInt(initSession.timestamp);
-              console.log(`${timeSpent} is the timeSpent`);
+              // console.log(`${timeSpent} is the timeSpent`);
               totalTimeSpent.push(timeSpent);
             }
           });
-          console.log("totalTimespent", totalTimeSpent);
+          // console.log("totalTimespent", totalTimeSpent);
           let total = 0;
           for (let i = 0; i < totalTimeSpent.length; i++) {
             total += totalTimeSpent[i];
           }
-          console.log("total", total);
+          // console.log("total", total);
           this.totalTimeSpent = {
             total: total,
             totalTimeSpentArray: totalTimeSpent
@@ -163,7 +253,7 @@ export default {
 
           let averageTimeSpentFloat = total / totalTimeSpent.length;
           let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
-          console.log("averageTimesSpent", averageTimeSpent);
+          // console.log("averageTimesSpent", averageTimeSpent);
           this.averageTimeSpent = averageTimeSpent;
         });
     }

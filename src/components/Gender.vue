@@ -45,7 +45,7 @@ export default {
   },
 
  mounted() {
-    this.genderStats();
+    // this.genderStats();
   },
 
   methods: {

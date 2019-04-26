@@ -31,9 +31,6 @@ import _ from 'lodash'
 import { ChartSankey } from 'vue-d2b'
       import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-
-am4core.useTheme(am4themes_animated);
 
 export default {
 
@@ -61,6 +58,7 @@ export default {
       }
     },
     mounted() {
+      
       let chart = am4core.create(this.$refs.chartdiv, am4charts.SankeyDiagram);
             this.chart = chart
 
@@ -89,7 +87,11 @@ nodeTemplate.readerTitle = "Click to show/hide or drag to rearrange";
 nodeTemplate.showSystemTooltip = true;
 nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
 
-      this.sankeyChart()
+      
+           chart.data = this.events
+        
+        // this.sankeyChart();
+       
 
 
 /* Chart code */
@@ -176,12 +178,6 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
           console.log(finalArr)
            this.chart.data = finalArr
 
-//           this.chart.data = [
-//  {from: "pages/newcustomer/newcustomer", to: "pages/newshop/newshop", value: 3},
-//  {from: "pages/newshop/newshop", to: "pages/shop/shop", value: 3},
-//  {from: "pages/shop/shop", to: "pages/shops/shops", value: 37},
-//  {from: "pages/shop/shop", to: "pages/newshop/newshop", value: 37}
-// ];
 
         }
 
