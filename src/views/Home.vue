@@ -42,8 +42,8 @@
         <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
         <Gender :users="users" :events="events"></Gender>
       </div>
-      <Map v-bind:mdata="map"/>
-      <Funnel v-bind:events="events"/>
+      <Map v-bind:mdata="map" v-if="events.length>0"/>
+      <Funnel v-bind:events="events" v-if="events.length>0"/>
     </div>
   </div>
 </template>
