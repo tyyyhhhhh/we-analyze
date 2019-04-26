@@ -1,10 +1,9 @@
 
 <template>
     <div class="map-container">
-        <div id="world-map" class="jvmap-smart">        </div>
-
-
-
+        <h4>Location Demographics</h4>
+        <div id="world-map" class="jvmap-smart">
+        </div>
     </div>
 </template>
 
@@ -115,12 +114,12 @@ export default {
         },
           mapData() {
           let userProvinces =[]
-        this.mdata.forEach((user) => {        
+        this.mdata.forEach((user) => {
           if(user.province !== null && user.province !== ""){
             userProvinces.push(user.province)
           }
         })
-        let newObj = {} 
+        let newObj = {}
         Object.entries(mapProvinces).forEach((province) => {
           userProvinces.forEach((userProvince) => {
               if (province[0] === userProvince) {
@@ -131,7 +130,7 @@ export default {
                   obj[userProvince] = 1
                 }
               }
-              
+
               // if (obj[userProvince]){
               // console.log(obj.userProvince)
               // obj[userProvince] += 1
@@ -150,11 +149,12 @@ export default {
         // console.log(userProvinces)
         // console.log(_.countBy([userProvinces], "value"))
 
-        // 
+
+        //
 
         //   console.log(obj)
 
-          
+
         // }
       // });
       // console.log("this one is the real one")
@@ -166,7 +166,7 @@ export default {
         mdata: Array
     },
     computed: {
-      
+
 
     }
 }
@@ -183,7 +183,8 @@ export default {
 .map-container {
   background-color: white;
   padding: 20px 0;
-  height: 380px;
+  height: 420px;
   border: 1px solid #EAEAEA;
+  width: 610px;
 }
 </style>

@@ -38,12 +38,18 @@
         :validVisits="validVisits"
         :totalTimeSpent="totalTimeSpent"
       />
+
+
+      <Funnel :key="funnelKey" v-bind:events="funnelChart" v-if="funnelChart.length>0"/>
+
       <div class="dailystats">
-        <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+        <Map  v-bind:mdata="map" v-if="events.length>0"/>
         <Gender :users="users" :events="events"></Gender>
       </div>
-      <Map  v-bind:mdata="map" v-if="events.length>0"/>
-      <Funnel :key="funnelKey" v-bind:events="funnelChart" v-if="funnelChart.length>0"/>
+
+
+      <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
+
     </div>
   </div>
 </template>
@@ -315,7 +321,6 @@ this.funnelKey = this.funnelKey == 0 ? 1:0
 .dailystats {
   display: flex;
   justify-content: space-between;
-  height: 530px;
 }
 
 body {

@@ -2,8 +2,8 @@
 <template>
   <div class="bg-forchart">
       <h4>Daily Statistics by the Week</h4>
-   <div id="chart">
-      <apexchart v-if="dailyStatistics" type=line height=350 :options="chartOptions" :series="dailyStatistics" />
+   <div id="linechart">
+      <apexchart v-if="dailyStatistics" type=line width=850 height=400 :options="chartOptions" :series="dailyStatistics" />
     </div>
   </div>
 </template>
@@ -165,12 +165,19 @@ export default {
 
 <style>
 
+#linechart {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
 .bg-forchart {
   background-color: white;
   padding: 20px;
   margin: 30px 0;
   border: 1px solid #EAEAEA;
-  width: 650px;
+  width: 100%;
+  height: 560px;
 }
 
 </style>
