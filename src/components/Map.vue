@@ -179,7 +179,7 @@ export default {
 .map-container {
   background-color: white;
   padding: 20px 0;
-  height: 350px;
+  height: 380px;
   border: 1px solid #EAEAEA;
 }
 </style>

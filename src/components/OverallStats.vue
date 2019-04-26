@@ -25,7 +25,7 @@
       <p>Avg Time Spent:</p>
       <div class="innerBox">
         <fa-icon icon="history" class="history-icon-primary"/>
-        <el-button type="primary" size="mini" round plain>{{averageTimeSpent}}s</el-button>
+        <el-button type="primary" size="mini" round plain>{{averageTimeSpent}}min</el-button>
       </div>
     </div>
   </div>
@@ -52,8 +52,8 @@ export default {
     averageTimeSpent() {
       let { total, totalTimeSpentArray } = this.totalTimeSpent;
       let averageTimeSpentFloat = total / totalTimeSpentArray.length;
-      let averageTimeSpent = Number(averageTimeSpentFloat).toFixed(0);
-      console.log("Time spent", averageTimeSpent);
+      let averageSecSpent = Number(averageTimeSpentFloat).toFixed(0);
+      let averageTimeSpent = Number(averageSecSpent / 60).toFixed(0);
       return averageTimeSpent;
     },
     bounceRate() {
@@ -66,7 +66,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped lang="scss">
 .overallStats-Container {
   display: flex;
   justify-content: space-between;
@@ -78,12 +78,11 @@ export default {
 }
 
 .outterBox {
-  width: 120px;
   background-color: white;
-  padding: 20px 30px ;
-  width: 240px;
+  padding: 20px 30px;
+  width: 260px;
   text-align: left;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 }
 
 .outterBox p {

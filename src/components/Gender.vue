@@ -4,11 +4,11 @@
     <h4>Gender Demographics</h4>
     <div id="chart">
       <apexchart
-        @click="genderStats"
+        v-if="genderStats"
         type="donut"
         width="380"
         :options="chartOptions"
-        :series="series"
+        :series="genderStats"
       />
     </div>
   </div>
@@ -21,7 +21,7 @@ let maleCount = 0;
 export default {
   data() {
     return {
-      series: [1, 1],
+      series: [],
 
       chartOptions: {
         labels: ["Male", "Female"],
@@ -44,11 +44,16 @@ export default {
     };
   },
 
-  mounted() {
+ mounted() {
     this.genderStats();
   },
 
   methods: {
+
+
+  },
+
+  computed: {
     genderStats() {
       this.users.forEach(user => {
         if (user.gender === "2") {
@@ -59,15 +64,12 @@ export default {
         let genderRatio = (femaleCount / (femaleCount + maleCount)) * 100;
         // console.log(genderRatio)
       });
-      this.series = [maleCount, femaleCount];
-    },
 
-    changeData() {
-      setInterval(() => {
-        this.series = [1, 2, 3, 4];
-      }, 100);
-    }
+      return [maleCount, femaleCount]
+      // this.series = [maleCount, femaleCount];
+    },
   },
+
   props: {
     title: {
       type: String,
@@ -111,7 +113,7 @@ body {
 
 #chart {
   max-width: 650px;
-  margin: 35px auto;
+  margin: 60px auto;
 }
 
 .demog {
