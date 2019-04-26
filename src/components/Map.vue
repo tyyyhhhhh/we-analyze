@@ -99,17 +99,21 @@ export default {
         }
     },
     mounted(){
-        this.drawMap();
+      this.drawMap()
+
+    setInterval(() => {
+     this.mapData();
+    }, 3000);
+       
+
     },
     methods:{
         drawMap(){
-                  this.mapData();
+        this.mapData();
             $('#world-map').vectorMap(this.mapOptions);
             $('#world-map').vectorMap('get', 'mapObject').updateSize()
         },
           mapData() {
-          console.log("hey")
-
           let userProvinces =[]
         this.mdata.forEach((user) => {        
           if(user.province !== null && user.province !== ""){
@@ -136,15 +140,15 @@ export default {
               // }
           })
         })
-        console.log(newObj)
+        // console.log(newObj)
 
 
             // })
           
           
         
-        console.log(userProvinces)
-        console.log(_.countBy([userProvinces], "value"))
+        // console.log(userProvinces)
+        // console.log(_.countBy([userProvinces], "value"))
 
         // 
 
@@ -153,8 +157,8 @@ export default {
           
         // }
       // });
-      console.log("this one is the real one")
-      console.log(obj)
+      // console.log("this one is the real one")
+      // console.log(obj)
       return obj
         }
     },

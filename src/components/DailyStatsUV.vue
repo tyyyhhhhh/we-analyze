@@ -80,7 +80,7 @@ export default {
 
 
     mounted() {
-      this.dailyStatistics()
+      // this.dailyStatistics()
     },
 
   computed: {
@@ -113,7 +113,7 @@ export default {
         return a;
         },[]);
 
-        console.log('num', uniqDays)
+        // console.log('num', uniqDays)
 
         uniqDays.forEach((day) => {
           // console.log("why not workin???", day, days[day].length)
@@ -122,7 +122,7 @@ export default {
 
         // console.log('after', days[dd-1])
         const array_display_data = [3, 8, 4, 6, 7,days[dd-1],days[dd]]
-        console.log(array_display_data)
+        // console.log(array_display_data)
 
       let weeklyData = array_display_data.map((element) => {
       if(!element) { return 0 }
@@ -132,7 +132,7 @@ export default {
 
       this.series[0].data = weeklyData
       const changedData = this.series
-      console.log("weekly Data working?", changedData)
+      // console.log("weekly Data working?", changedData)
       return changedData
 
     },
