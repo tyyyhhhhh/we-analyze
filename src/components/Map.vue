@@ -2,7 +2,7 @@
 <template>
     <div class="map-container">
         <div id="world-map" class="jvmap-smart">        </div>
-        {{mapData}}
+
 
 
     </div>
@@ -100,20 +100,14 @@ export default {
     },
     mounted(){
         this.drawMap();
-
     },
     methods:{
         drawMap(){
+                  this.mapData();
             $('#world-map').vectorMap(this.mapOptions);
             $('#world-map').vectorMap('get', 'mapObject').updateSize()
-        }
-    },
-    props: {
-        mdata: Array
-    },
-    computed: {
-      
-        mapData() {
+        },
+          mapData() {
           console.log("hey")
 
           let userProvinces =[]
@@ -163,6 +157,13 @@ export default {
       console.log(obj)
       return obj
         }
+    },
+    props: {
+        mdata: Array
+    },
+    computed: {
+      
+
     }
 }
 </script>

@@ -12,8 +12,8 @@
     <DailyStatsUV v-if="events.length>0" :users="users" :events="events"/>
     <Gender :users="users" :events="events"></Gender>
   </div>
-    <Map v-bind:mdata="map" />
-    <Funnel v-bind:events="events" />
+    <Map  v-if="map.length>0" v-bind:mdata="map" />
+    <Funnel v-if="events.length>0" v-bind:events="events" />
 
 
 
@@ -88,30 +88,13 @@ export default {
   // Methods are called once
   methods: {
     loadData() {
-            axios.get('http://haoshihui.wogengapp.cn/api/v1/users')
-        .then((response) => {
-          let data = response.data.users
-          this.map = data
 
-        }),
-      axios.get('http://haoshihui.wogengapp.cn/api/v1/events')
-        .then((response) => {
-          let data = response.data.events
-          this.events = data
-
-        }),
-
-      axios
-        .get("http://haoshihui.wogengapp.cn/api/v1/events")
-        .then(response => {
-          let data = response.data.events;
-          this.events = data;
-        }),
         axios
           .get("https://haoshihui.wogengapp.cn/api/v1/users")
           .then(response => {
             let data = response.data.users;
             this.users = data;
+                      this.map = data
             let validVisits = 0;
             data.forEach(user => {
               if (user.nickName) {
@@ -128,6 +111,8 @@ export default {
         .get("http://haoshihui.wogengapp.cn/api/v1/events")
         .then(response => {
           let data = response.data;
+                    this.events = data.events
+
           let totalVisits = 0;
           data.events.forEach(event => {
             if (event.description === "customerOpenApp") {
