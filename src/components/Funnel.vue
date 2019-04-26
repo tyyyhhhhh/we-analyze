@@ -105,6 +105,7 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
     },
     methods: {
       sankeyChart() {
+        console.log(this.events)
         let users = (_.groupBy(this.events, (event) => { return event.user_open_id }))
         let userAllSessions = Object.values(users)
         let finalArr = []
