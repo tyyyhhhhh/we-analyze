@@ -1,7 +1,10 @@
 
 <template>
     <div class="map-container">
-        <div id="world-map" class="jvmap-smart"></div>
+        <div id="world-map" class="jvmap-smart">        </div>
+        {{mapData}}
+
+
     </div>
 </template>
 
@@ -109,22 +112,56 @@ export default {
         mdata: Array
     },
     computed: {
+      
         mapData() {
-        this.mdata.forEach((user) => {
-        let userProvince = user.province;
-        Object.entries(mapProvinces).forEach((province) => {
-        if (province[0] === userProvince) {
-          userProvince = province[1];
-          if (obj[userProvince]){
-            console.log(obj.userProvince)
-            obj[userProvince] += 1
-          } else {
-            obj[userProvince] = 1
+          console.log("hey")
+
+          let userProvinces =[]
+        this.mdata.forEach((user) => {        
+          if(user.province !== null && user.province !== ""){
+            userProvinces.push(user.province)
           }
-          console.log(obj)
-        }
-      });
-    });
+        })
+        let newObj = {} 
+        Object.entries(mapProvinces).forEach((province) => {
+          userProvinces.forEach((userProvince) => {
+              if (province[0] === userProvince) {
+              let userProvince = province[1];
+                if (obj[userProvince]) {
+                  obj[userProvince] ++
+                } else {
+                  obj[userProvince] = 1
+                }
+              }
+              
+              // if (obj[userProvince]){
+              // console.log(obj.userProvince)
+              // obj[userProvince] += 1
+              // } else {
+              // obj[userProvince] = 1
+              // }
+          })
+        })
+        console.log(newObj)
+
+
+            // })
+          
+          
+        
+        console.log(userProvinces)
+        console.log(_.countBy([userProvinces], "value"))
+
+        // 
+
+        //   console.log(obj)
+
+          
+        // }
+      // });
+      console.log("this one is the real one")
+      console.log(obj)
+      return obj
         }
     }
 }
