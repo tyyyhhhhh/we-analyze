@@ -3,10 +3,12 @@ Count all the init session & save this as a 1st event
 Look for another event with a higher timestamp until you find an event = customerleft
 save that other event as event #2
 <template>
-  <div class='chart'>
-      <div ref="chartdiv" class="chartdiv">
-    
-  </div>
+  <div id="funnelcont">
+    <h4>User Journey</h4>
+    <div class='chart'>
+        <div ref="chartdiv" class="chartdiv">
+    </div>
+    </div>
   </div>
 
 </template>
@@ -42,7 +44,7 @@ export default {
         // to provide each chart type head over to the d2bjs.org docs.
         chartData: null ,
         chart: null,
-        
+
 
 
         // There are many configuration options for each chart type, checkout
@@ -112,7 +114,7 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
         userAllSessions.forEach((userSessions) => {
           let OrderedEvents = (_.sortBy(userSessions, (event) =>{return event.timestamp}))
           OrderedEvents.forEach((event) => {
-            let nextEvent = _.findIndex(OrderedEvents, event) + 1 
+            let nextEvent = _.findIndex(OrderedEvents, event) + 1
               event && OrderedEvents[nextEvent] && arr.push({ from: event.page, to: OrderedEvents[nextEvent].page, value: 1, source_description: event.description, target_description: OrderedEvents[nextEvent].description })
 
             //  else if(event == null && OrderedEvents[nextEvent] != null) {
@@ -125,7 +127,7 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
             //    && arr.push({ from: event.page , to: OrderedEvents[nextEvent].page, value: 1 })
             })
 
-            
+
          })
          let testObj = {}
           arr.forEach((element) => {
@@ -140,7 +142,7 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
 
             }
             else {
-              
+
               if (_.find(cleanArr, {from: element.from, to: element.to, value: element.value})){
                 _.pull(cleanArr, element)
 
@@ -150,11 +152,11 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
               } else {
                 cleanArr.push({from: element.from, to: element.to, value: element.value})
               }
-              
+
             }
           })
           Object.entries(testObj).forEach(([key, value]) => {
-            
+
             let newArr = (_.split(key, ' + '))
             if(newArr[0] !== newArr[1]){
               if(newArr[0] === "null"){
@@ -165,9 +167,9 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
               if (rankedPages[newArr[0]] < rankedPages[newArr[1]]) {
               finalArr.push({from: newArr[0], to: newArr[1], value: value})
               }
-              
-            } 
-            
+
+            }
+
             }
           )
 
@@ -182,8 +184,8 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
 // ];
 
         }
-        
-        
+
+
 
         // get user sessions by splitting at customerLeft
         // users.forEach((user) =>{
@@ -191,14 +193,21 @@ nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
         // })
       }
     }
-    
-  
+
+
 </script>
 
 <style>
   .chartdiv{
     height: 500px;
-    width: 80vw;
+
+  }
+
+  #funnelcont {
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #EAEAEA;
+    margin: 20px 0;
   }
 
 </style>

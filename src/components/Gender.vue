@@ -113,13 +113,14 @@ body {
 
 #chart {
   max-width: 650px;
-  margin: 60px auto;
+  margin: 45px auto;
 }
 
 .demog {
   background-color: white;
-  margin: 30px 0;
   padding: 20px;
   border: 1px solid #EAEAEA;
+  width: 450px;
+  height: 420px;
 }
 </style>
