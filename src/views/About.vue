@@ -37,14 +37,14 @@
 
     <div id="main-container">
       <div class="text-middle">
-       <!--  <h1>Understand your customers. </h1> -->
-          <h1 id="h1bold">Boost your Mini Program.</h1>
+        <!--  <h1>Understand your customers. </h1> -->
+        <h1 id="h1bold">Boost your Mini Program.</h1>
         <h5>Analyze customer behaviours on your app through reliable live data.</h5>
-        <a href="home" id="main-button" class="btn btn-primary" role="button">Implement in 5 mins</a>
+        <a href="home" id="main-button" class="btn btn-primary" role="button">Demo</a>
       </div>
 
       <div id="video-container">
-        <video src="../assets/introvid.mp4" controls></video>
+        <video src="../assets/introvid.mp4" autoplay muted loop controls></video>
       </div>
 
       <div>
@@ -70,12 +70,11 @@
       </div>
     </div>
 
-      <div id="footer">
-        <h2 id="footer-text">What will your data teach you about your business?</h2>
-        <button type="button" class="btn btn-outline-light">Find out now</button>
-      </div>
+    <div id="footer">
+      <h2 id="footer-text">What will your data teach you about your business?</h2>
+      <button type="button" class="btn btn-outline-light">Find out now</button>
     </div>
-
+  </div>
 </template>
 
 
